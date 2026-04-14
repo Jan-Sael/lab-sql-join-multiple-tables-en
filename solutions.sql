@@ -11,7 +11,14 @@ SELECT c.name AS "CATEGORY", AVG(f.length) AS "AVG LENGTH" FROM category c JOIN 
 SELECT c.name AS "CATEGORY", AVG(f.length) AS "AVG LENGTH" FROM category c JOIN film_category fc ON c.category_id = fc.category_id JOIN film f ON fc.film_id = f.film_id GROUP BY c.name ORDER BY "AVG LENGTH" DESC;
 
 -- Query 5 (Most frequently rented movies in descending order)
-SELECT f.title AS "TITLE", COUNT(r.rental_id) AS "RENTAL COUNT" FROM film f JOIN inventory i ON f.film_id = i.film_id JOIN rental r ON i.inventory_id = r.inventory_id GROUP BY f.title ORDER BY "RENTAL COUNT" DESC;
+SELECT f.title AS "TITLE", COUNT(r.rental_id) AS "RENTAL COUNT" 
+FROM film f 
+JOIN inventory i 
+ON f.film_id = i.film_id 
+JOIN rental r ON i.inventory_id = r.inventory_id 
+GROUP BY f.title 
+ORDER BY "RENTAL COUNT" 
+DESC;
 
 -- Query 6 (Top five genres by gross revenue)
 SELECT c.name AS "CATEGORY", SUM(p.amount) AS "TOTAL REVENUE" FROM category c JOIN film_category fc ON c.category_id = fc.category_id JOIN inventory i ON fc.film_id = i.film_id JOIN rental r ON i.inventory_id = r.inventory_id JOIN payment p ON r.rental_id = p.rental_id GROUP BY c.name ORDER BY "TOTAL REVENUE" DESC LIMIT 5;
